@@ -13,7 +13,7 @@ of this adopted baseline work in Github at https://github.com/valencebond/Rethin
 
 • Replacing the original 'models/base_block.py' file with ours.
 
-• Replacing the original 'configs\pedes_baseline' folder by ours.
+• Replacing the original 'configs/pedes_baseline' folder by ours.
 
 • Putting the 'convnext.py' file under the path 'models/backbone/' for testing on ConvNeXt-base.
 
