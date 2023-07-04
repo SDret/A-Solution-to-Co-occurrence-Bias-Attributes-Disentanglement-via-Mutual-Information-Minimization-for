@@ -37,5 +37,5 @@ To run the model training and testing is simple:
 CUDA VISIBLE_DEVICES=0 python train.py cfg ./configs/pedes_baseline/$DATASET_CONFIG$
 ```
 DATASET CONFIG can be 'pa100k.yaml', 'peta_zs.yaml',
-'peta.yaml', 'rap zs.yaml' or 'rapv1.yaml'. They are all provided in 'pedes_baseline'.
+'peta.yaml', 'rap_zs.yaml' or 'rapv1.yaml'. They are all provided in 'pedes_baseline'.
 
