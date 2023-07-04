@@ -1,23 +1,20 @@
 # About this code
-This is the official implementation of CVPR2022 paper 
-'Rethinking Reconstruction Autoencoder-Based Out-of-Distribution Detection'. The original benchmark results in paper 
-were produced in Tensorflow 1.14.0, and this codebase is a pytorch version of 
-re-implementing it. Thus, there might be minor differences regarding the 
-original results. Specifically, 
+This is the official implementation of IJCAI2023 paper 
+'A Solution to Co-occurrence Bias: Attributes Disentanglement via Mutual Information Minimization for Pedestrian Attribute Recognition'.
 
-* In this code, we do not partion the validation set for the 'scale' and 'location' fitting of Gaussian CDFs.
-Instead we just do it on the test set, which yields similar performance with that in the paper.
-* Some training configs like learning scheduler are different from that in paper.
-* The results on iSUN, tinyImageNet-resize and largeSUN-resize are slightly better than that in paper, while those on largeSUN-crop and tinyImageNet-crop are not. The reason-why is still to be figured out. 
+To make a fair comparison, our work strictly follows the benchmark protocol stated in the strong baseline work in https://github.com/valencebond/Rethinking_of_PAR by employing the released public code of this work for dataset partitioning, dataloader generation, backbones config setting and metric setup, etc.
 
-
-## Results
-The results on WRN-28-10 with CIFAR-100 is (FPR@95%TPR, detection error, AUROC and AUPR)
-
-![image](https://github.com/SDret/Pytorch-implementation-for-Rethinking-Reconstruction-Autoencoder-Based-Out-of-Distribution-Detection/blob/main/results.png)
+Thus, to efficiently implement the method and reproduce the benchmark results without further efforts and misunderstandings, we suggest readers to look through the public code
+of this adopted baseline work in Github at https://github.com/valencebond/Rethinking_of_PAR and implement our method directly onto this code by simply replacing serval .py files of model framework and training configs:
+• Replacing the original 'train.py' file with ours.
+• Replacing the original 'batch_engine.py' file with ours.
+• Replacing the original 'models/base_block.py' file with
+ours.
+• Replacing the original 'configs\pedes_baseline' folder
+by ours.
+• Putting the 'convnext.py' file under the path 'models/backbone/' for testing on ConvNeXt-base.
 
 
-If the Tensorflow original implementation of this work is desired, feel free to contact us with ybzhou@buaa.edu.cn
 ## Environment
 Please set the environment as
 
@@ -25,20 +22,17 @@ Pytorch == 1.10.1+cu102
 
 numpy == 1.19.5 python == 3.6.9 64- bit.
 
+The experiments in main text are conducted on a single NVIDIA Tesla V100 32G.
+
+## Datasets
+Before running the codes, you need to download all datasets (PA100k, RAP and PETA) from their official releases, and struct the downloaded ones exactly as that is required in https://github.com/valencebond/Rethinking_of_PAR. For the PETAzs and RAPzs datasets, this baseline work already provides generating files under the path of 'data'.
 
 ## Start training
-
-Please mkdir the folder 'data', and download all the datasets into it from the baseline work ODIN: https://github.com/facebookresearch/odin. Training logs and trained model parameters would be saved under the path 'exp_result'.
-
-To start the two-phase training, you need run:
+To run the model training and testing is simple:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python3 train.py --cfg ./configs/ood/cifar100.yaml
+CUDA VISIBLE_DEVICES=0 python train.py cfg ./configs/pedes_baseline/$DATASET_CONFIG$
 ```
-and move the saved trained model under the path 'saved_model/backbone/$BACKBONETYPE$'. Next, apply this path in the config file 'cifar100_ood.yaml' and run the code:
-
-```
-CUDA_VISIBLE_DEVICES=0 python3 train.py --cfg ./configs/ood/cifar100_ood.yaml
-```
-Benchmark results will be automatically printed while training.
+DATASET CONFIG can be 'pa100k.yaml', 'peta_zs.yaml',
+'peta.yaml', 'rap zs.yaml' or 'rapv1.yaml'. They are all provided in 'pedes_baseline'.
 
