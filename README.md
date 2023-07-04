@@ -6,12 +6,15 @@ To make a fair comparison, our work strictly follows the benchmark protocol stat
 
 Thus, to efficiently implement the method and reproduce the benchmark results without further efforts and misunderstandings, we suggest readers to look through the public code
 of this adopted baseline work in Github at https://github.com/valencebond/Rethinking_of_PAR and implement our method directly onto this code by simply replacing serval .py files of model framework and training configs:
+
 • Replacing the original 'train.py' file with ours.
+
 • Replacing the original 'batch_engine.py' file with ours.
-• Replacing the original 'models/base_block.py' file with
-ours.
-• Replacing the original 'configs\pedes_baseline' folder
-by ours.
+
+• Replacing the original 'models/base_block.py' file with ours.
+
+• Replacing the original 'configs\pedes_baseline' folder by ours.
+
 • Putting the 'convnext.py' file under the path 'models/backbone/' for testing on ConvNeXt-base.
 
 
