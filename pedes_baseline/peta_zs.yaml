@@ -1,0 +1,80 @@
+NAME: 'resnet50.base.adam'
+
+BACKBONE:
+  MULTISCALE: False
+  TYPE: 'resnet50'
+  #TYPE: 'convnext'
+CLASSIFIER:
+  BN: False
+  NAME: linear
+  POOLING: avg
+  SCALE: 1
+  TYPE: base
+DATASET:
+  HEIGHT: 256
+  LABEL: eval
+  NAME: PETA
+  TARGETTRANSFORM: []
+  TYPE: pedes
+  VAL_SPLIT: test
+  WIDTH: 192
+  ZERO_SHOT: True
+DISTRIBUTTED: False
+INFER:
+  SAMPLING: False
+LOSS:
+  LOSS_WEIGHT: [1]
+  SAMPLE_WEIGHT: weight
+  SIZESUM: True
+  TYPE: bceloss
+METRIC:
+  TYPE: pedestrian
+NAME: resnet50.base.adam
+REDIRECTOR: True
+RELOAD:
+  NAME: backbone
+  PTH: saved_model/
+  TYPE: False
+TRAIN:
+  AUX_LOSS_START: -1
+  BATCH_SIZE: 64
+  BN_WD: True
+  CLIP_GRAD: True
+  DATAAUG:
+    AUTOAUG_PROB: 0.5
+    TYPE: base
+  EMA:
+    DECAY: 0.9998
+    ENABLE: False
+    FORCE_CPU: False
+  LR_SCHEDULER:
+    LR_FT: 0.0001
+    LR_NEW: 0.0001
+    #for resnet50
+    LR_STEP: [24]
+    #for convnext
+    #LR_STEP: [4]
+    TYPE: multistep
+    WMUP_COEF: 0.1
+  MAX_EPOCH: 80
+  NUM_WORKERS: 4
+  OPTIMIZER:
+    MOMENTUM: 0.9
+    TYPE: adam
+    WEIGHT_DECAY: 0.0005
+  SHUFFLE: True
+TRANS:
+  DEC_LAYERS: 6
+  DIM_FFD: 2048
+  DIM_HIDDEN: 256
+  DROPOUT: 0.1
+  ENC_LAYERS: 6
+  EOS_COEF: 0.1
+  NHEADS: 8
+  NUM_QUERIES: 100
+  PRE_NORM: False
+VIS:
+  CAM: valid
+  TENSORBOARD:
+    ENABLE: True
+  VISDOM: False

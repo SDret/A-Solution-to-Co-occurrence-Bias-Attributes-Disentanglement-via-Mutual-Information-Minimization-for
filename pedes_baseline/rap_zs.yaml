@@ -1,0 +1,52 @@
+NAME: 'resnet50.base.adam'
+
+DATASET:
+  TYPE: 'pedes'
+  NAME: 'RAP2'
+  VAL_SPLIT: test
+  ZERO_SHOT: True
+  LABEL: 'eval'
+  HEIGHT: 256
+  WIDTH: 192
+
+RELOAD:
+  TYPE: False
+  NAME: 'backbone'
+
+BACKBONE:
+  TYPE: 'convnext'
+
+CLASSIFIER:
+  NAME: 'linear'
+  POOLING: 'avg'
+  SCALE: 1
+  BN: False
+
+LOSS:
+  TYPE: 'bceloss'
+  LOSS_WEIGHT: [1]
+  SAMPLE_WEIGHT: 'weight'
+
+TRAIN:
+  MAX_EPOCH: 80
+  CLIP_GRAD: True
+  BATCH_SIZE: 64
+  OPTIMIZER:
+    TYPE: 'adam'
+    WEIGHT_DECAY: 5e-4
+  LR_SCHEDULER:
+  # for resnet
+    LR_STEP: [20]
+  # for convnext
+  #  LR_STEP: [5]
+    TYPE: 'multistep'
+    LR_FT: 0.00006
+    LR_NEW: 0.00006
+  EMA:
+    ENABLE: False
+
+METRIC:
+  TYPE: 'pedestrian'
+
+VIS:
+  CAM: 'valid'
