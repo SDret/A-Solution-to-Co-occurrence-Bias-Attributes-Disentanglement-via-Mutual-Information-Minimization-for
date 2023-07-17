@@ -193,12 +193,6 @@ def trainer(cfg, args, epoch, model, model_ema, train_loader, valid_loader, crit
     for e in range(epoch):
         
         lr = optimizer.param_groups[1]['lr']
-        
-
-        #for pa100k resnet： 11
-        #for peta_zs resnet:
-        if e >= 11:
-            optimizer.param_groups[0]['lr'] = 0.0000001
 
         train_loss, train_gt, train_probs, train_imgs, train_logits, train_loss_mtr = batch_trainer(
             cfg,
