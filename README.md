@@ -1,6 +1,6 @@
 # About this code
 This is the official implementation of IJCAI2023 paper 
-'A Solution to Co-occurrence Bias: Attributes Disentanglement via Mutual Information Minimization for Pedestrian Attribute Recognition'.
+'A Solution to Co-occurrence Bias: Attributes Disentanglement via Mutual Information Minimization for Pedestrian Attribute Recognition' at https://arxiv.org/abs/2307.15252.
 
 To make a fair comparison, our work strictly follows the benchmark protocol stated in the strong baseline work in https://github.com/valencebond/Rethinking_of_PAR by employing the released public code of this work for dataset partitioning, dataloader generation, backbones config setting and metric setup, etc.
 
